@@ -118,6 +118,6 @@ class __TwigTemplate_04bf1d8f896c3253133176ae9e0618df30a9e773ab60d0104217d98125a
         {{ form_end(form) }}
     </div>
 {% endblock %}
-", "task/edit.html.twig", "C:\\laragon\\www\\todov2\\templates\\task\\edit.html.twig");
+", "task/edit.html.twig", "C:\\laragon\\www\\Todo\\templates\\task\\edit.html.twig");
     }
 }

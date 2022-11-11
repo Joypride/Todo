@@ -122,6 +122,6 @@ class __TwigTemplate_7b64afc25cc76196ed4f755e96d0cd25d620ee589110ac0d04a60837bfd
         {% endfor %}
     </tbody>
 </table>
-", "@WebProfiler/Profiler/table.html.twig", "C:\\laragon\\www\\todov2\\vendor\\symfony\\web-profiler-bundle\\Resources\\views\\Profiler\\table.html.twig");
+", "@WebProfiler/Profiler/table.html.twig", "C:\\laragon\\www\\Todo\\vendor\\symfony\\web-profiler-bundle\\Resources\\views\\Profiler\\table.html.twig");
     }
 }

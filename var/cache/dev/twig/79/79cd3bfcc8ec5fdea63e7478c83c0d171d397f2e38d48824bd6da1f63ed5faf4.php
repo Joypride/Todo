@@ -644,6 +644,6 @@ class __TwigTemplate_64a57550e21a7fb8996ddb5d76c9de0de43504b2f36f68fbb6accf0afa9
         </div>
     {% endfor %}
 {% endblock %}
-", "@WebProfiler/Collector/notifier.html.twig", "C:\\laragon\\www\\todov2\\vendor\\symfony\\web-profiler-bundle\\Resources\\views\\Collector\\notifier.html.twig");
+", "@WebProfiler/Collector/notifier.html.twig", "C:\\laragon\\www\\Todo\\vendor\\symfony\\web-profiler-bundle\\Resources\\views\\Collector\\notifier.html.twig");
     }
 }

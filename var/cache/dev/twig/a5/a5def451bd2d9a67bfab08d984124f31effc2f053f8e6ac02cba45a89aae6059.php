@@ -248,6 +248,6 @@ class __TwigTemplate_53525f3ab80a1e9619ad608e27e283886c80c69f74228c971dc432591f3
         </div>
     {% endif %}
 {% endblock %}
-", "user/list.html.twig", "C:\\laragon\\www\\todov2\\templates\\user\\list.html.twig");
+", "user/list.html.twig", "C:\\laragon\\www\\Todo\\templates\\user\\list.html.twig");
     }
 }

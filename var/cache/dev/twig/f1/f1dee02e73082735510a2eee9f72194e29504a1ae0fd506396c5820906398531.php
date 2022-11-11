@@ -386,6 +386,6 @@ class __TwigTemplate_e9594c9a1777dac46e2ecf6571fef730ba54515c757761b2387527787f0
         <script src=\"{{ asset('js/bootstrap.min.js') }}\"></script>
     </body>
 </html>
-", "base.html.twig", "C:\\laragon\\www\\todov2\\templates\\base.html.twig");
+", "base.html.twig", "C:\\laragon\\www\\Todo\\templates\\base.html.twig");
     }
 }

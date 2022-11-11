@@ -1,3 +1,0 @@
-<?php //Symfony%255CComponent%255CPasswordHasher%255CHasher%255CPasswordHasherAwareInterface%2523getPasswordHasherName
-
-return [PHP_INT_MAX, []];
