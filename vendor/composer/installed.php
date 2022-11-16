@@ -3,7 +3,7 @@
         'name' => '__root__',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '7e5eef2f9a08bb4ff03c41fee849a99dae3f585f',
+        'reference' => 'f71c6bc35ab9d8d2deacacf9526e9207e73c3373',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -13,7 +13,7 @@
         '__root__' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '7e5eef2f9a08bb4ff03c41fee849a99dae3f585f',
+            'reference' => 'f71c6bc35ab9d8d2deacacf9526e9207e73c3373',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -316,6 +316,15 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
+        'phpstan/phpstan' => array(
+            'pretty_version' => '1.9.2',
+            'version' => '1.9.2.0',
+            'reference' => 'd6fdf01c53978b6429f1393ba4afeca39cc68afa',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../phpstan/phpstan',
+            'aliases' => array(),
+            'dev_requirement' => true,
+        ),
         'phpunit/php-code-coverage' => array(
             'pretty_version' => '9.2.18',
             'version' => '9.2.18.0',
@@ -457,6 +466,15 @@
             'provided' => array(
                 0 => '1.0|2.0|3.0',
             ),
+        ),
+        'rector/rector' => array(
+            'pretty_version' => '0.14.8',
+            'version' => '0.14.8.0',
+            'reference' => '46ee9a173a2b2645ca92a75ffc17460139fa226e',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../rector/rector',
+            'aliases' => array(),
+            'dev_requirement' => true,
         ),
         'sebastian/cli-parser' => array(
             'pretty_version' => '1.0.1',
@@ -891,9 +909,9 @@
             'dev_requirement' => false,
         ),
         'symfony/maker-bundle' => array(
-            'pretty_version' => 'v1.47.0',
-            'version' => '1.47.0.0',
-            'reference' => 'e607f129d29a6c1e9a9e1ef3d229d653311d58f3',
+            'pretty_version' => 'v1.48.0',
+            'version' => '1.48.0.0',
+            'reference' => '2e428e8432e9879187672fe08f1cc335e2a31dd6',
             'type' => 'symfony-bundle',
             'install_path' => __DIR__ . '/../symfony/maker-bundle',
             'aliases' => array(),

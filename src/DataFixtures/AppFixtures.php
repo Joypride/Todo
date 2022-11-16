@@ -23,12 +23,11 @@ class AppFixtures extends Fixture
 
         $admin->setUsername('Laurie');
         $admin->setEmail('laurie@todo.fr');
-
-        $adminPassword = $this->passwordHasher->hashPassword($admin,'pomme');
-
-        $admin->setPassword($adminPassword);
+        $admin->setPassword($this->passwordHasher->hashPassword($admin,'pomme'));
+        $admin->setRoles(['ROLE_ADMIN']);
 
         $manager->persist($admin);
+        $this->addReference('admin', $admin);
 
         for ($i = 0; $i <= 10; ++$i) {
             
@@ -37,15 +36,34 @@ class AppFixtures extends Fixture
             $user->setUsername($faker->userName());
             $user->setEmail($faker->email());
             $user->setPassword($faker->password());
+            $user->setRoles(['ROLE_USER']);
 
             $manager->persist($user);
+            $this->addReference('user' . $i, $user);
         }
         $manager->flush();
     }        
 
     public function loadTasks(ObjectManager $manager): void
     {
-        for ($i = 0; $i < 15; $i++) {
+        for ($i = 0; $i < 7; $i++) {
+
+            $faker = Factory::create();
+            $dateTask = new DateTime();
+
+            $randomNumber = rand(0, 10);
+            $user = $this->getReference('user' . $randomNumber);
+            
+            $task = new Task();
+            $task->setCreatedAt($dateTask);
+            $task->setTitle($faker->words());
+            $task->setContent($faker->sentence(5));
+            $task->setUser($user);
+            $manager->persist($task);
+        }
+        $manager->flush();
+
+        for ($i = 0; $i < 7; $i++) {
             $faker = Factory::create();
 
             $dateTask = new DateTime();
@@ -54,6 +72,7 @@ class AppFixtures extends Fixture
             $task->setCreatedAt($dateTask);
             $task->setTitle($faker->words());
             $task->setContent($faker->sentence(5));
+            $task->setUser($this->getReference('admin'));
             $manager->persist($task);
         }
         $manager->flush();

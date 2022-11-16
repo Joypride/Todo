@@ -16,6 +16,8 @@ return array(
     'App\\Form\\TaskType' => $baseDir . '/src/Form/TaskType.php',
     'App\\Form\\UserType' => $baseDir . '/src/Form/UserType.php',
     'App\\Kernel' => $baseDir . '/src/Kernel.php',
+    'App\\Tests\\Entity\\TaskTest' => $baseDir . '/tests/Entity/TaskTest.php',
+    'App\\Tests\\Entity\\UserTest' => $baseDir . '/tests/Entity/UserTest.php',
     'Collator' => $vendorDir . '/symfony/polyfill-intl-icu/Resources/stubs/Collator.php',
     'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
     'DeepCopy\\DeepCopy' => $vendorDir . '/myclabs/deep-copy/src/DeepCopy/DeepCopy.php',
