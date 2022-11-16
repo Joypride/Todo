@@ -46,11 +46,6 @@ class Task
         $this->isDone = false;
     }
 
-    public function __toString()
-    {
-        return $this->title;
-    }
-
     public function getId()
     {
         return $this->id;

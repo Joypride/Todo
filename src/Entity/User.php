@@ -101,7 +101,7 @@ class User implements UserInterface, \Serializable, PasswordAuthenticatedUserInt
      */
     public function serialize(): string
     {
-        return serialize([$this->id, $this->username, $this->password, $this->isActivated, $this->isVerified]);
+        return serialize([$this->id, $this->username, $this->password, $this->email]);
     }
  
     /**
@@ -109,7 +109,7 @@ class User implements UserInterface, \Serializable, PasswordAuthenticatedUserInt
      */
     public function unserialize($serialized): void
     {
-        [$this->id, $this->username, $this->password, $this->isActivated, $this->isVerified] = unserialize($serialized);
+        [$this->id, $this->username, $this->password, $this->email] = unserialize($serialized);
     }
 
     public function eraseCredentials()

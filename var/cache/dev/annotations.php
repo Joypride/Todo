@@ -90,8 +90,6 @@ return [[
 '[C]App%5CEntity%5CTask' => 1,
 'App%5CEntity%5CTask%23__construct' => 0,
 '[C]App%5CEntity%5CTask%23__construct' => 1,
-'App%5CEntity%5CTask%23__toString' => 0,
-'[C]App%5CEntity%5CTask%23__toString' => 1,
 'App%5CEntity%5CTask%23getId' => 0,
 '[C]App%5CEntity%5CTask%23getId' => 1,
 'App%5CEntity%5CTask%23getCreatedAt' => 0,
@@ -706,7 +704,7 @@ return [[
 ], [
 
 0 => [],
-1 => 1668157968,
+1 => 1668254729,
 2 => static function () {
     return \Symfony\Component\VarExporter\Internal\Hydrator::hydrate(
         $o = [

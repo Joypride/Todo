@@ -37,6 +37,8 @@ class TaskController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $doctrine->getManager();
 
+            $task->setUser($this->getUser());
+
             $em->persist($task);
             $em->flush();
 
@@ -57,8 +59,8 @@ class TaskController extends AbstractController
 
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
-            $this->$doctrine->getManager()->flush();
+        if ($form->isSubmitted() && $form->isValid()) {
+            $doctrine->getManager()->flush();
 
             $this->addFlash('success', 'La tâche a bien été modifiée.');
 
@@ -77,7 +79,10 @@ class TaskController extends AbstractController
     public function toggleTaskAction(Task $task, ManagerRegistry $doctrine)
     {
         $task->toggle(!$task->isDone());
-        $this->$doctrine->getManager()->flush();
+
+        $em = $doctrine->getManager();
+        $em->persist($task);
+        $em->flush();
 
         $this->addFlash('success', sprintf('La tâche %s a bien été marquée comme faite.', $task->getTitle()));
 
@@ -89,7 +94,7 @@ class TaskController extends AbstractController
      */
     public function deleteTaskAction(Task $task, ManagerRegistry $doctrine)
     {
-        $em = $this->$doctrine->getManager();
+        $em = $doctrine->getManager();
         $em->remove($task);
         $em->flush();
 
