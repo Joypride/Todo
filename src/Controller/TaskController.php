@@ -84,6 +84,12 @@ class TaskController extends AbstractController
     #[Route(path: '/tasks/{id}/delete', name: 'task_delete')]
     public function deleteTaskAction(Task $task, ManagerRegistry $doctrine)
     {
+        if ($this->getUser() !== $task->getUser() || !$this->isGranted('ROLE_ADMIN')) 
+        {
+            $this->addFlash('error', 'Seul l\'auteur de la tâche ou un admin peut la supprimer !');
+            return $this->redirectToRoute('task_list');
+        }
+
         $em = $doctrine->getManager();
         $em->remove($task);
         $em->flush();

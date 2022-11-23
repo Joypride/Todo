@@ -19,6 +19,14 @@ class AppFixtures extends Fixture
 
     public function loadUsers(ObjectManager $manager): void
     {
+        $anonymous = new User();
+        $anonymous->setUsername('Anonymous');
+        $anonymous->setEmail('ano@nymous.fr');
+        $anonymous->setPassword($this->passwordHasher->hashPassword($anonymous,'pomme'));
+        $anonymous->setRoles(['ROLE_USER']);
+
+        $manager->persist($anonymous);
+
         $admin = new User();
 
         $admin->setUsername('Laurie');
@@ -56,7 +64,7 @@ class AppFixtures extends Fixture
             
             $task = new Task();
             $task->setCreatedAt($dateTask);
-            $task->setTitle($faker->words());
+            $task->setTitle($faker->word());
             $task->setContent($faker->sentence(5));
             $task->setUser($user);
             $manager->persist($task);
@@ -70,7 +78,7 @@ class AppFixtures extends Fixture
             
             $task = new Task();
             $task->setCreatedAt($dateTask);
-            $task->setTitle($faker->words());
+            $task->setTitle($faker->word());
             $task->setContent($faker->sentence(5));
             $task->setUser($this->getReference('admin'));
             $manager->persist($task);
