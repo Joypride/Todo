@@ -14,18 +14,22 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 class UserController extends AbstractController
 {
     #[Route(path: '/users', name: 'user_list')]
-    public function listAction(ManagerRegistry $doctrine)
+    public function list(ManagerRegistry $doctrine)
     {
-        $repository = $doctrine->getRepository(User::class);
-        $users = $repository->findAll();
-
-        return $this->render('user/list.html.twig', [
-            'users' => $users,
-        ]);
+        if($this->isGranted('ROLE_ADMIN')) {
+            $repository = $doctrine->getRepository(User::class);
+            $users = $repository->findAll();
+    
+            return $this->render('user/list.html.twig', [
+                'users' => $users,
+            ]);
+        } else {
+            return $this->redirectToRoute('homepage');
+        }
     }
 
     #[Route(path: '/users/create', name: 'user_create')]
-    public function createAction(EntityManagerInterface $entityManager, Request $request, UserPasswordHasherInterface $userPasswordHasher)
+    public function create(EntityManagerInterface $entityManager, Request $request, UserPasswordHasherInterface $userPasswordHasher)
     {
         $user = new User();
         $form = $this->createForm(UserType::class, $user);
@@ -53,7 +57,7 @@ class UserController extends AbstractController
     }
 
     #[Route(path: '/users/{id}/edit', name: 'user_edit')]
-    public function editAction(User $user, EntityManagerInterface $entityManager, Request $request, UserPasswordHasherInterface $userPasswordHasher)
+    public function edit(User $user, EntityManagerInterface $entityManager, Request $request, UserPasswordHasherInterface $userPasswordHasher)
     {
         $form = $this->createForm(UserType::class, $user);
 
