@@ -6,13 +6,14 @@ use App\Entity\Task;
 use App\Form\TaskType;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class TaskController extends AbstractController
 {
     #[Route(path: '/tasks', name: 'task_list')]
-    public function list(ManagerRegistry $doctrine)
+    public function list(ManagerRegistry $doctrine): Response
     {
         $repository = $doctrine->getRepository(Task::class);
         $tasks = $repository->findAll();
@@ -23,7 +24,7 @@ class TaskController extends AbstractController
     }
 
     #[Route(path: '/tasks/create', name: 'task_create')]
-    public function create(Request $request, ManagerRegistry $doctrine)
+    public function create(Request $request, ManagerRegistry $doctrine): Response
     {
         $task = new Task();
         $form = $this->createForm(TaskType::class, $task);
@@ -47,7 +48,7 @@ class TaskController extends AbstractController
     }
 
     #[Route(path: '/tasks/{id}/edit', name: 'task_edit')]
-    public function edit(Task $task, Request $request, ManagerRegistry $doctrine)
+    public function edit(Task $task, Request $request, ManagerRegistry $doctrine): Response
     {
         $form = $this->createForm(TaskType::class, $task);
 
@@ -68,7 +69,7 @@ class TaskController extends AbstractController
     }
 
     #[Route(path: '/tasks/{id}/toggle', name: 'task_toggle')]
-    public function toggleTask(Task $task, ManagerRegistry $doctrine)
+    public function toggleTask(Task $task, ManagerRegistry $doctrine): Response
     {
         $task->toggle(!$task->isDone());
 
@@ -82,7 +83,7 @@ class TaskController extends AbstractController
     }
 
     #[Route(path: '/tasks/{id}/delete', name: 'task_delete')]
-    public function deleteTask(Task $task, ManagerRegistry $doctrine)
+    public function deleteTask(Task $task, ManagerRegistry $doctrine): Response
     {
         if ($this->getUser() !== $task->getUser() || !$this->isGranted('ROLE_ADMIN')) 
         {

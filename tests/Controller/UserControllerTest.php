@@ -53,12 +53,14 @@ class UserControllerTest extends SecurityControllerTest
         static::assertSame(1, $crawler->filter('input[name="user[password][first]"]')->count());
         static::assertSame(1, $crawler->filter('input[name="user[password][second]"]')->count());
         static::assertSame(1, $crawler->filter('input[name="user[email]"]')->count());
+        static::assertSame(1, $crawler->filter('select[name="user[roles][]"]')->count());
 
         $form = $crawler->selectButton('Ajouter')->form();
         $form['user[username]'] = 'newuser';
         $form['user[password][first]'] = 'test';
         $form['user[password][second]'] = 'test';
         $form['user[email]'] = 'newUser@example.org';
+        $form['user[roles]'] = 'ROLE_USER';
         $this->client->submit($form);
         static::assertSame(200, $this->client->getResponse()->getStatusCode());
     }
