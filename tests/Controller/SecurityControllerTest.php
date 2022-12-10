@@ -12,17 +12,34 @@ class SecurityControllerTest extends WebTestCase
         $this->client = self::createClient();
     }
 
-    public function testLoginWithValidData(): void
+    public function testLoginPage(): void
     {
         $crawler = $this->client->request('GET', '/login');
         self::assertEquals(200, $this->client->getResponse()->getStatusCode());
         self::assertCount(2, $crawler->filter('input'));
     }
 
+    public function testLoginWithValidData(): void
+    {
+        $crawler = $this->client->request('GET', '/login');
+
+        $buttonCrawlerMode = $crawler->filter('form');
+        $form = $buttonCrawlerMode->form([
+            '_username' => 'Laurie',
+            '_password' => 'pomme'
+        ]);
+
+        $this->client->submit($form);
+
+        $crawler = $this->client->followRedirect();
+        static::assertSame(200, $this->client->getResponse()->getStatusCode());
+        static::assertSame("Bienvenue sur Todo List, l'application vous permettant de gérer l'ensemble de vos tâches sans effort !", $crawler->filter('h1')->text());
+    }
+
+
     public function testLoginWithInvalidData(): void
     {
         $crawler = $this->client->request('GET', '/login');
-        self::assertEquals(200, $this->client->getResponse()->getStatusCode());
 
         $buttonCrawlerMode = $crawler->filter('form');
         $form = $buttonCrawlerMode->form([
@@ -32,8 +49,9 @@ class SecurityControllerTest extends WebTestCase
 
         $this->client->submit($form);
 
-        self::assertEquals(302, $this->client->getResponse()->getStatusCode());
         $crawler = $this->client->followRedirect();
+        static::assertSame(200, $this->client->getResponse()->getStatusCode());
+        static::assertSame("Invalid credentials.", $crawler->filter('div.alert.alert-danger')->text());
     }
 
     public function loginWithAdmin(): void

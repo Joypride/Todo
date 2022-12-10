@@ -1,7 +1,7 @@
 # ToDo & Co
 
 [![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg)](http://forthebadge.com)
-[![SymfonyInsight](https://insight.symfony.com/projects/7f26dd7f-2105-4602-9f7c-09761d4c290c/small.svg)](https://insight.symfony.com/projects/7f26dd7f-2105-4602-9f7c-09761d4c290c)
+[![SymfonyInsight](https://insight.symfony.com/projects/6be206dd-88fe-48b9-9c3f-c69f46e1f5f0/big.svg)](https://insight.symfony.com/projects/6be206dd-88fe-48b9-9c3f-c69f46e1f5f0)
 
 ### Installation
 

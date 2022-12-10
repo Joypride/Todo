@@ -28,15 +28,14 @@ class TaskControllerTest extends SecurityControllerTest
 
         $form = $crawler->selectButton('Ajouter')->form();
         $form['task[title]'] = 'Nouvelle tâche';
-        $form['task[content]'] = 'Ceci est une tâche crée par un test';
+        $form['task[content]'] = 'Ceci est une tâche créée par un test';
         $this->client->submit($form); 
-        static::assertSame(302, $this->client->getResponse()->getStatusCode());
 
         $crawler = $this->client->followRedirect();
-        static::assertSame(200, $this->client->getResponse()->getStatusCode());
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+        static::assertEquals("Superbe !", $crawler->filter('div.alert.alert-success strong')->text());
     }
 
-    // Edition d'une tâche par un utilisateur simple
     public function testEdit()
     {
         $crawler = $this->client->request('GET', '/tasks/1/edit');
@@ -50,27 +49,37 @@ class TaskControllerTest extends SecurityControllerTest
         $form['task[title]'] = 'Modification de tache';
         $form['task[content]'] = 'Je modifie une tache';
         $this->client->submit($form);
+
         static::assertSame(302, $this->client->getResponse()->getStatusCode());
 
         $crawler = $this->client->followRedirect();
         static::assertSame(200, $this->client->getResponse()->getStatusCode());
     }
 
-    // Suppression d'une tâche crée par un utiliseur simple et supprimé par le même auteur
     public function testDeleteTask()
     {
-        $this->loginWithUser();
+        $this->loginWithAdmin();
 
-        $this->client->request('GET', '/tasks/8/delete');
+        $this->client->request('GET', '/tasks/14/delete');
         static::assertSame(302, $this->client->getResponse()->getStatusCode());
 
         $this->client->followRedirect();
         static::assertSame(200, $this->client->getResponse()->getStatusCode());
     }
 
-    public function testDeleteTaskWhereSimpleUserIsNotAuthor()
+    public function testDeleteTaskWhenUserIsNotAuthor()
     {
-        $this->client->request('GET', '/tasks/8/delete');
+        $this->loginWithUser();
+
+        $this->client->request('GET', '/tasks/20/delete');
+        static::assertSame(403, $this->client->getResponse()->getStatusCode());
+    }
+
+    public function testDeleteTaskWithAdminrWhereAuthorIsAnonymous()
+    {
+        $this->loginWithAdmin();
+
+        $this->client->request('GET', '/tasks/25/delete');
         static::assertSame(302, $this->client->getResponse()->getStatusCode());
 
         $this->client->followRedirect();
@@ -79,11 +88,10 @@ class TaskControllerTest extends SecurityControllerTest
 
     public function testDeleteTaskWithSimpleUserWhereAuthorIsAnonymous()
     {
-        $this->client->request('GET', '/tasks/24/delete');
-        static::assertSame(302, $this->client->getResponse()->getStatusCode());
+        $this->loginWithUser();
 
-        $this->client->followRedirect();
-        static::assertSame(200, $this->client->getResponse()->getStatusCode());
+        $this->client->request('GET', '/tasks/24/delete');
+        static::assertSame(403, $this->client->getResponse()->getStatusCode());
     }
 
     public function testToggleTask()
