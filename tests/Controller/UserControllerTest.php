@@ -23,6 +23,17 @@ class UserControllerTest extends SecurityControllerTest
         static::assertSame("Liste des utilisateurs", $crawler->filter('h1')->text());
     }
 
+    public function testListWhileUser()
+    {
+        $this->loginWithUser();
+
+        $this->client->request('GET', '/users');
+        static::assertSame(302, $this->client->getResponse()->getStatusCode());
+
+        $this->client->followRedirect();
+        static::assertSame(200, $this->client->getResponse()->getStatusCode());
+    }
+
     public function testEdit()
     {
         $crawler = $this->client->request('GET', '/users/2/edit');
@@ -62,6 +73,7 @@ class UserControllerTest extends SecurityControllerTest
         $form['user[email]'] = 'newUser@example.org';
         $form['user[roles]'] = 'ROLE_USER';
         $this->client->submit($form);
+
         static::assertSame(200, $this->client->getResponse()->getStatusCode());
     }
 }

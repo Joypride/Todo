@@ -81,7 +81,7 @@ class TaskVoter extends Voter
      */
     public function canDelete(Task $task)
     {
-        if (($task->getUser() == null && !$this->security->isGranted('ROLE_ADMIN')) || ($task->getUser() !== null && $this->security->getUser() !== $task->getUser())) {
+        if (($task->getUser() === null && !$this->security->isGranted('ROLE_ADMIN')) || ($task->getUser() !== null && $this->security->getUser() !== $task->getUser())) {
             return false;
         }
         return true;
