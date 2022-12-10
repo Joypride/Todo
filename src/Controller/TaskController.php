@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Task;
 use App\Form\TaskType;
+use App\Security\TaskVoter;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -85,12 +86,7 @@ class TaskController extends AbstractController
     #[Route(path: '/tasks/{id}/delete', name: 'task_delete')]
     public function deleteTask(Task $task, ManagerRegistry $doctrine): Response
     {
-        if ($this->getUser() !== $task->getUser() || !$this->isGranted('ROLE_ADMIN')) 
-        {
-            $this->addFlash('error', 'Seul l\'auteur de la tâche ou un admin peut la supprimer !');
-            return $this->redirectToRoute('task_list');
-        }
-
+        $this->denyAccessUnlessGranted(TaskVoter::DELETE, $task);
         $em = $doctrine->getManager();
         $em->remove($task);
         $em->flush();

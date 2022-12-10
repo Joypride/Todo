@@ -376,6 +376,11 @@
     <service id="App\Form\UserType" class="App\Form\UserType" autowire="true" autoconfigure="true">
       <tag name="form.type"/>
     </service>
+    <service id="App\Security\AccessDeniedHandler" class="App\Security\AccessDeniedHandler" autowire="true" autoconfigure="true"/>
+    <service id="App\Security\TaskVoter" class="App\Security\TaskVoter" autowire="true" autoconfigure="true">
+      <tag name="security.voter"/>
+      <argument type="service" id="security.helper"/>
+    </service>
     <service id="argument_metadata_factory" class="Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadataFactory"/>
     <service id="response_listener" class="Symfony\Component\HttpKernel\EventListener\ResponseListener">
       <tag name="kernel.event_subscriber"/>
@@ -5493,7 +5498,7 @@
       <argument>security.user.provider.concrete.doctrine</argument>
       <argument>main</argument>
       <argument>security.authenticator.form_login.main</argument>
-      <argument>null</argument>
+      <argument>App\Security\AccessDeniedHandler</argument>
       <argument>null</argument>
       <argument type="collection">
         <argument>form_login</argument>
@@ -5711,7 +5716,7 @@
       <argument>main</argument>
       <argument type="service" id="security.authenticator.form_login.main"/>
       <argument>null</argument>
-      <argument>null</argument>
+      <argument type="service" id="App\Security\AccessDeniedHandler"/>
       <argument type="service" id="monolog.logger.security" on-invalid="null"/>
       <argument>false</argument>
     </service>
@@ -6099,6 +6104,8 @@
     <service id=".abstract.instanceof.App\Form\TaskType" class="App\Form\TaskType" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\UserType" class="App\Form\UserType" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Form\UserType" class="App\Form\UserType" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Component\Security\Core\Authorization\Voter\VoterInterface.0.App\Security\TaskVoter" class="App\Security\TaskVoter" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Security\TaskVoter" class="App\Security\TaskVoter" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".service_locator.gSv9zYw" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
@@ -6691,6 +6698,10 @@
       <argument type="service" id="security.access.expression_voter"/>
       <argument type="service" id="debug.event_dispatcher"/>
     </service>
+    <service id="debug.security.voter.App\Security\TaskVoter" class="Symfony\Component\Security\Core\Authorization\Voter\TraceableVoter">
+      <argument type="service" id="App\Security\TaskVoter"/>
+      <argument type="service" id="debug.event_dispatcher"/>
+    </service>
     <service id="security.listener.csrf_protection" class="Symfony\Component\Security\Http\EventListener\CsrfProtectionListener">
       <tag name="kernel.event_subscriber"/>
       <argument type="service" id="security.csrf.token_manager"/>
@@ -7099,6 +7110,7 @@
         <argument type="service" id="debug.security.voter.security.access.authenticated_voter"/>
         <argument type="service" id="debug.security.voter.security.access.role_hierarchy_voter"/>
         <argument type="service" id="debug.security.voter.security.access.expression_voter"/>
+        <argument type="service" id="debug.security.voter.App\Security\TaskVoter"/>
       </argument>
       <argument type="service">
         <service class="Symfony\Component\Security\Core\Authorization\Strategy\AffirmativeStrategy">
