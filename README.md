@@ -13,7 +13,7 @@
 
 - Créez une base de données sur votre SGBD ou avec la commande ``php bin/console doctrine:database:create``
 
-- Importez le fichier todo.sql ou commencez la migration avec la commande ``php bin/console doctrine:migrations:migrate`` et insérez les fixtures avec la commande ``php bin/console doctrine:fixtures:load``
+- Commencez la migration avec la commande ``php bin/console doctrine:migrations:migrate`` et insérez les fixtures avec la commande ``php bin/console doctrine:fixtures:load``
 
 - Lancez l'éxecution du projet avec la commande ``symfony server:start``
 
