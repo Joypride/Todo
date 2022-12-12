@@ -46,6 +46,7 @@ Le projet peut accueillir de nombreuses améliorations parmi lesquelles:
 - Ajouter des liens et boutons pour améliorer l’ergonomie du site (retour à l’accueil, liste des utilisateurs, lien sur le logo, etc)
 - Moderniser le design
 - Personnaliser les pages d’erreur
+- Rendre l'application entièrement responsive
 
 ### Tâches
 
@@ -53,7 +54,7 @@ Le projet peut accueillir de nombreuses améliorations parmi lesquelles:
 - Ajouter une pagination
 - Ajouter un historique sur l’ajout et la modification des tâches
 - Pouvoir mettre une deadline 
-- entraliser les tâches par thème 
+- Centraliser les tâches par thème 
 - Pouvoir n’accéder qu'à la liste de ses propres tâches
 
 ### Utilisateurs

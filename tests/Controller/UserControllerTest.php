@@ -55,7 +55,9 @@ class UserControllerTest extends SecurityControllerTest
     }
 
     public function testCreate()
-    {        
+    {   
+        $this->loginWithAdmin();
+
         $crawler = $this->client->request('GET', '/users/create');
         static::assertSame(200, $this->client->getResponse()->getStatusCode());
 
@@ -72,8 +74,8 @@ class UserControllerTest extends SecurityControllerTest
         $form['user[password][second]'] = 'test';
         $form['user[email]'] = 'newUser@example.org';
         $form['user[roles]'] = 'ROLE_USER';
-        $this->client->submit($form);
 
+        $this->client->submit($form);
         static::assertSame(200, $this->client->getResponse()->getStatusCode());
     }
 }
